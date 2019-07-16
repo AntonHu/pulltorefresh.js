@@ -1,5 +1,5 @@
 /*!
- * pulltorefreshjs v0.1.16
+ * pulltorefreshjs v0.1.17
  * (c) Rafael Soto
  * Released under the MIT License.
  */
@@ -182,6 +182,7 @@
       _shared.distExtra = _shared.dist - _el.distIgnore;
 
       if (_shared.distExtra > 0) {
+        _el.triggerElement.style.overflow = 'hidden';
         e.preventDefault();
         _el.ptrElement.style[_el.cssProp] = (_shared.distResisted) + "px";
         _shared.distResisted = _el.resistanceFunction(_shared.distExtra / _el.distThreshold) * Math.min(_el.distMax, _shared.distExtra);
@@ -208,6 +209,8 @@
       if (!(_el && _el.ptrElement && _shared.enable)) {
         return;
       }
+
+      _el.triggerElement.style.overflow = 'auto';
 
       if (_shared.state === 'releasing' && _shared.distResisted > _el.distThreshold) {
         _shared.state = 'refreshing';

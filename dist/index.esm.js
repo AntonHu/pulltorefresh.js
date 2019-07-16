@@ -171,6 +171,7 @@ var _setupEvents = (function () {
     _shared.distExtra = _shared.dist - _el.distIgnore;
 
     if (_shared.distExtra > 0) {
+      _el.triggerElement.style.overflow = 'hidden';
       e.preventDefault();
       _el.ptrElement.style[_el.cssProp] = (_shared.distResisted) + "px";
       _shared.distResisted = _el.resistanceFunction(_shared.distExtra / _el.distThreshold) * Math.min(_el.distMax, _shared.distExtra);
@@ -197,6 +198,8 @@ var _setupEvents = (function () {
     if (!(_el && _el.ptrElement && _shared.enable)) {
       return;
     }
+
+    _el.triggerElement.style.overflow = 'auto';
 
     if (_shared.state === 'releasing' && _shared.distResisted > _el.distThreshold) {
       _shared.state = 'refreshing';
